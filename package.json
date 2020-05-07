@@ -1,0 +1,27 @@
+{
+  "name": "spiderfront",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "tsc && node dist.js"
+  },
+  "dependencies": {
+    "spiderlib": "latest"
+  },
+  "devDependencies": {
+    "ncp": "2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ylwrm/SpiderFront.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ylwrm/SpiderFront/issues"
+  },
+  "homepage": "https://github.com/ylwrm/SpiderFront#readme"
+}

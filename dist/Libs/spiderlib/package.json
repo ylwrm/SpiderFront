@@ -1,0 +1,51 @@
+{
+  "_from": "spiderlib@latest",
+  "_id": "spiderlib@0.0.18",
+  "_inBundle": false,
+  "_integrity": "sha512-FzGVC5cr8uaWzCuoND1byvhctv0SBjeYgI3LN33vrkqghoTmQbFbLb++frnx9cWYVMg9ZqHTxmfB3wVeUPFPqw==",
+  "_location": "/spiderlib",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "spiderlib@latest",
+    "name": "spiderlib",
+    "escapedName": "spiderlib",
+    "rawSpec": "latest",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/spiderlib/-/spiderlib-0.0.18.tgz",
+  "_shasum": "0547060ca0e3c858168942aa916be2beffb9f00e",
+  "_spec": "spiderlib@latest",
+  "_where": "C:\\WorkSpace\\repo\\Spider\\trunk\\Product\\SpiderWebFrame\\SpiderFront",
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/ylwrm/spiderlib/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "```typescript\r declare class XmlUtility {\r     static Xml2json(data: string, arrayChecker: (node: Element) => boolean): any;\r }\r ```",
+  "files": [
+    "/dist/*.js",
+    "/dist/*.d.ts",
+    "/types/",
+    "/examples/"
+  ],
+  "homepage": "https://github.com/ylwrm/spiderlib#readme",
+  "license": "ISC",
+  "main": "dist/spiderlib.js",
+  "name": "spiderlib",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ylwrm/spiderlib.git"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "types": "dist/spiderlib.d.ts",
+  "version": "0.0.18"
+}
