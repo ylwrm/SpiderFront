@@ -1,0 +1,9 @@
+{
+    "libs": [
+        "handsontable"
+    ],
+    "scripts": [
+        "Libs/spiderpackageprimary/dist/SpiderTable.js"
+    ],
+    "csses": []
+}

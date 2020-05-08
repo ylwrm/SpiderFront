@@ -2,13 +2,14 @@
   "name": "spiderfront",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dist": "tsc && node dist.js"
   },
   "dependencies": {
-    "spiderlib": "latest"
+    "spiderlib": "latest",
+    "spiderpackageprimary": "latest",
+    "glob": "7.1.6"
   },
   "devDependencies": {
     "ncp": "2.0.0"

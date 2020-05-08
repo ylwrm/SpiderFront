@@ -35,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-/// <reference path="../types/spider.d.ts" />
+/// <reference path="../types/Spider.d.ts" />
 var Guid = /** @class */ (function () {
     function Guid() {
     }
@@ -210,5 +210,37 @@ var FileSystem = /** @class */ (function () {
         });
     };
     return FileSystem;
+}());
+var DomLoader = /** @class */ (function () {
+    function DomLoader() {
+    }
+    DomLoader.LoadScript = function (scriptUrl) {
+        return __awaiter(this, void 0, void 0, function () {
+            var script;
+            return __generator(this, function (_a) {
+                script = document.createElement('script');
+                script.src = scriptUrl;
+                document.body.appendChild(script);
+                return [2 /*return*/, new Promise(function (resolve, reject) {
+                        script.onload = resolve;
+                    })];
+            });
+        });
+    };
+    DomLoader.LoadCss = function (cssUrl) {
+        return __awaiter(this, void 0, void 0, function () {
+            var link;
+            return __generator(this, function (_a) {
+                link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = cssUrl;
+                document.head.appendChild(link);
+                return [2 /*return*/, new Promise(function (resolve, reject) {
+                        link.onload = resolve;
+                    })];
+            });
+        });
+    };
+    return DomLoader;
 }());
 //# sourceMappingURL=spiderlib.js.map

@@ -1,0 +1,9 @@
+{
+    "libs": [],
+    "scripts": [
+        "Libs/handsontable/dist/handsontable.full.min.js"
+    ],
+    "csses": [
+        "Libs/handsontable/dist/handsontable.full.min.css"
+    ]
+}
