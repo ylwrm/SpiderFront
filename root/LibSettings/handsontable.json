@@ -1,4 +1,5 @@
 {
+    "components": [],
     "libs": [],
     "scripts": [
         "Libs/handsontable/dist/handsontable.full.min.js"
