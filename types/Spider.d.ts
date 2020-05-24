@@ -1,11 +1,9 @@
-declare namespace Spider{
-    interface ComponentSetting{
-        components: string[];
-        libs: string[];
+declare namespace Spider {
+    interface ComponentSetting {
         scripts: string[];
         csses: string[];
     }
-    interface ComponentInstanceSetting{
+    interface ComponentInstanceSetting {
         name: string;
         type: string;
         config: any;

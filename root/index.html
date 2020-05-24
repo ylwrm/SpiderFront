@@ -18,8 +18,20 @@
 </head>
 
 <body style="width: 100vw; height: 100vh; margin: 0px; overflow: hidden;">
-  <script src="libs/spiderlib/dist/spiderlib.js"></script>
-  <script src="createComponent.js"></script>
+  <!-- for IE Promise-->
+  <script src="Libs/es6-promise/dist/es6-promise.auto.min.js"></script>
+  
+  <!-- Accessories-->
+  <script src="Accessories/DomLoader.js"></script>
+  <script src="Accessories/FileSystem.js"></script>
+  <script src="Accessories/Guid.js"></script>
+  <script src="Accessories/HttpClient.js"></script>
+  <script src="Accessories/XmlUtility.js"></script>
+
+  <!-- Base Component Class: ComponentInstance-->
+  <script src="Classes/ComponentInstance.js"></script>
+
+  <!-- Main-->
   <script src="main.js"></script>
 </body>
 
