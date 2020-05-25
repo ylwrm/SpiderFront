@@ -6,13 +6,6 @@ abstract class ComponentInstance {
     async (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting)=>{
         return undefined;
     };
-
-    ///
-    static prepare: ()=>Promise<void>
-    = 
-    async ()=>{
-
-    };
     
     ///
     abstract destroy: (option?: any) => Promise<void>;

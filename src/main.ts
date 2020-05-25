@@ -10,13 +10,21 @@ rootDiv.className = 'root';
 document.body.appendChild(rootDiv);
 
 
+async function CreateComponentInstance(componentInstanceSetting: Spider.ComponentInstanceSetting, rootDiv: HTMLDivElement) {
+    const type = componentInstanceSetting.type;
+    await DomLoader.LoadScript(rootComponents + '/' + type + '.js');
+    const instDiv = document.createElement('div');
+    instDiv.style.width = '100%';
+    instDiv.style.height = '100%';
+    rootDiv.appendChild(instDiv);
+    app = await (window[type] as typeof ComponentInstance).createInstance(instDiv, componentInstanceSetting);
+    return app;
+}
+
 const initApp = async (rootDiv: HTMLDivElement, appName: string) => {
     const appString = await HttpClient.get(rootApplications + '/' + appName + '/' + appFileName);
     const componentInstanceSetting: Spider.ComponentInstanceSetting = JSON.parse(appString);
-    const type = componentInstanceSetting.type;
-    await DomLoader.LoadScript(rootComponents + '/' + type + '.js');
-    app = await (window[type] as typeof ComponentInstance).createInstance(rootDiv, componentInstanceSetting);
-    return app;
+    return await CreateComponentInstance(componentInstanceSetting, rootDiv);
 };
 
 (async () => {

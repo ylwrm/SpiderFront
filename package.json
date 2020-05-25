@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "es6-promise": "4.2.8",
-    "handsontable": "6.2.2"
+    "handsontable": "6.2.2",
+    "vue": "2.6.11",
+    "element-ui": "2.13.2"
   },
   "devDependencies": {
     "ncp": "2.0.0",

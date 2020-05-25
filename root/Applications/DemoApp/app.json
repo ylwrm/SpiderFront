@@ -1,5 +1,13 @@
 {
     "name": "DemoApp",
-    "type": "SpiderTable",
-    "config": {}
+    "type": "SpiderCombination",
+    "config": {
+        "controls":[
+            {
+                "name": "VueDemo",
+                "type": "SpiderVueDemo",
+                "config": {}
+            }
+        ]
+    }
 }

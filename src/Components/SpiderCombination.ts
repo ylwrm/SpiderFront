@@ -1,27 +1,40 @@
 
+interface SpiderCombinationInstanceSetting {
+    name: string;
+    type: string;
+    config: {
+        controls: Spider.ComponentInstanceSetting[]
+    };
+}
 class SpiderCombination extends ComponentInstance {
-    private table: Handsontable | undefined;
-
+    public ControlInsts: ComponentInstance[] = [];
+    private div: HTMLDivElement;
+    private setting: Spider.ComponentInstanceSetting;
+    
+    constructor(div: HTMLDivElement, setting: SpiderCombinationInstanceSetting) {
+        super();
+        this.div = div;
+        this.setting = setting;
+    }
     ///
-    static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance | undefined>
+    private setup = async ()=>{
+        for (let iC = 0; iC < this.setting.config.controls.length; iC++) {
+            const control = this.setting.config.controls[iC];
+            const controlInst = await CreateComponentInstance(control, this.div);
+            if (controlInst) {
+                this.ControlInsts.push(controlInst);
+            }
+        }
+    };
+    ///
+    static createInstance: (div: HTMLDivElement, setting: SpiderCombinationInstanceSetting) => Promise<ComponentInstance | undefined>
         =
-        async (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => {
+        async (div: HTMLDivElement, setting: SpiderCombinationInstanceSetting) => {
             await SpiderCombination.prepare();
-            const obj = new SpiderCombination();
-            const data = [
-                ['', 'Tesla', 'Volvo', 'Toyota', 'Ford'],
-                ['2019', 10, 11, 12, 13],
-                ['2020', 20, 11, 14, 13],
-                ['2021', 30, 15, 12, 13]
-            ];
-            obj.table = new Handsontable(div, {
-                data: data,
-                rowHeaders: true,
-                colHeaders: true
-            });
+            const obj = new SpiderCombination(div, setting);
+            await obj.setup();
             return obj;
         };
-
     ///
     static prepare: () => Promise<void>
         =
@@ -44,8 +57,18 @@ class SpiderCombination extends ComponentInstance {
 
     ///
     destroy = async () => {
-        if (this.table) {
-            this.table.destroy();
+        // for (let iC = 0; iC < this.ControlInsts.length; iC++) {
+        //     const ctlInst = this.ControlInsts[iC];
+        //     await ctlInst.destroy();
+        // }
+        while (true) {
+            const ctlInst = this.ControlInsts.pop();
+            if (ctlInst) {
+                await ctlInst.destroy();
+            } else {
+                break;
+            }
         }
+        this.div.parentElement?.removeChild(this.div);
     }
 }

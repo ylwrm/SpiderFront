@@ -13,7 +13,10 @@ if (!fs.existsSync(process.cwd() + '\\dist\\Libs')) {
 // # libs
 const libs = [
     'handsontable\\dist\\handsontable.full.min.*',
-    'es6-promise\\dist\\es6-promise.auto.min.js'
+    'es6-promise\\dist\\es6-promise.auto.min.js',
+    'vue\\dist\\vue.min.js',
+    'element-ui\\lib\\index.js',
+    'element-ui\\lib\\theme-chalk\\**\\*.*'
 ];
 for (let iL = 0; iL < libs.length; iL++) {
     const lib = libs[iL];
