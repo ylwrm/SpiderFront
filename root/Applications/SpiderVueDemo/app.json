@@ -1,11 +1,11 @@
 {
-    "name": "DemoSpider",
+    "name": "DemoApp",
     "type": "SpiderCombination",
     "config": {
         "controls":[
             {
-                "name": "Table",
-                "type": "SpiderTable",
+                "name": "SpiderVueDemo",
+                "type": "SpiderVueDemo",
                 "config": {}
             }
         ]

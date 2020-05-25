@@ -1,15 +1,24 @@
-class SpiderVueDemoLib extends ComponentInstance {
+
+interface SpiderVueComponentInstanceSetting {
+    name: string;
+    type: string;
+    config: {
+        type: string
+    };
+}
+
+class SpiderVueComponent extends ComponentInstance {
     private div: HTMLDivElement;
-    private setting: Spider.ComponentInstanceSetting;
+    private setting: SpiderVueComponentInstanceSetting;
     private bigString = new Array(5000000);
 
-    constructor(div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) {
+    constructor(div: HTMLDivElement, setting: SpiderVueComponentInstanceSetting) {
         super();
         this.div = div;
         this.setting = setting;
 
-        const demo4 = Vue.extend(window['spider-vue-demo-lib']);
-        const d = new demo4().$mount()
+        const vueInst = Vue.extend(window[setting.config.type]);
+        const d = new vueInst().$mount()
         this.div.appendChild(d.$el);
     };
 
@@ -17,22 +26,22 @@ class SpiderVueDemoLib extends ComponentInstance {
     static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance | undefined>
         =
         async (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => {
-            await SpiderVueDemoLib.prepare();
-            const obj = new SpiderVueDemoLib(div, setting);
+            await SpiderVueComponent.prepare(div, setting);
+            const obj = new SpiderVueComponent(div, setting);
             return obj;
         };
 
     ///
-    static prepare: () => Promise<void>
+    static prepare: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<void>
         =
-        async () => {
+        async (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => {
             const scripts: string[] = [
-                "Libs/vue/dist/vue.min.js",
-                "Libs/element-ui/lib/index.js",
-                "Vue/spider-vue-demo-lib.umd.min.js"
+                'Libs/vue/dist/vue.min.js',
+                'Libs/element-ui/lib/index.js',
+                'Vue/' + setting.config.type + '/' + setting.config.type +'.umd.min.js'
             ];
             const csses: string[] = [
-                "Libs/element-ui/lib/theme-chalk/index.css"
+                'Libs/element-ui/lib/theme-chalk/index.css'
             ];
             for (let iS = 0; iS < scripts.length; iS++) {
                 const spt = scripts[iS];
