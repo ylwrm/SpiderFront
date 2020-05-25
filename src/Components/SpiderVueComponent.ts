@@ -17,9 +17,10 @@ class SpiderVueComponent extends ComponentInstance {
         this.div = div;
         this.setting = setting;
 
-        const vueInst = Vue.extend(window[setting.config.type]);
-        const d = new vueInst().$mount()
-        this.div.appendChild(d.$el);
+        const vueType = Vue.extend(window[setting.config.type]);
+        const vueInst = new vueType().$mount();
+        console.log(vueInst);
+        this.div.appendChild(vueInst.$el);
     };
 
     ///

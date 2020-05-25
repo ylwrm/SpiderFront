@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  data() {
+  data: function() {
     return {
       tableData: [
         {
@@ -50,12 +50,11 @@ export default {
       currentRow: null,
     };
   },
-
   methods: {
-    setCurrent(row) {
+    setCurrent: function(row) {
       this.$refs.singleTable.setCurrentRow(row);
     },
-    handleCurrentChange(val) {
+    handleCurrentChange: function(val) {
       this.currentRow = val;
     },
   },

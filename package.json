@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "http-server dist",
     "dist": "tsc && node dist.js",
-    "buildDemoLib": "vue-cli-service build --mode development --target lib --dest dist/Vue/SpiderVueDemoLib --name SpiderVueDemoLib src/Vue/SpiderVueDemoLib.vue"
+    "buildDemoLib": "vue-cli-service build --mode development --target lib --dest dist/Vue/SpiderVueDemoLib --name SpiderVueDemoLib src/Vue/SpiderVueDemoLib.vue",
+    "buildSplitContainer": "vue-cli-service build --mode development --target lib --dest dist/Vue/SpiderVueSplitContainer --name SpiderVueSplitContainer src/Vue/SpiderVueSplitContainer.vue"
   },
   "dependencies": {
     "es6-promise": "4.2.8",
