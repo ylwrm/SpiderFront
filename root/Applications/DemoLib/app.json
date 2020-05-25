@@ -1,0 +1,13 @@
+{
+    "name": "DemoApp",
+    "type": "SpiderCombination",
+    "config": {
+        "controls":[
+            {
+                "name": "VueDemoLib",
+                "type": "SpiderVueDemoLib",
+                "config": {}
+            }
+        ]
+    }
+}
