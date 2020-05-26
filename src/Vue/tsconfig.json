@@ -3,6 +3,8 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "declaration": true,
+    "rootDir": "./",
+    "outDir": "../../dist/VueTypes",
     "emitDeclarationOnly": true,
     "moduleResolution": "node",
     "types": [

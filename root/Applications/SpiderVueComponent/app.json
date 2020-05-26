@@ -7,7 +7,7 @@
                 "name": "SpiderVueComponent",
                 "type": "SpiderVueComponent",
                 "config": {
-                    "type": "SpiderVueDemoLib"
+                    "type": "SpiderVueDemoTs2"
                 }
             }
         ]
