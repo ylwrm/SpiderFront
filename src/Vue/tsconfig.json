@@ -1,0 +1,12 @@
+{
+  // "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "moduleResolution": "node",
+    "types": [
+      "webpack-env"
+    ]
+  }
+}

@@ -22,7 +22,7 @@ async function CreateComponentInstance(componentInstanceSetting: Spider.Componen
 }
 
 const initApp = async (rootDiv: HTMLDivElement, appName: string) => {
-    const appString = await HttpClient.get(rootApplications + '/' + appName + '/' + appFileName);
+    const appString = await HttpClient.Get(rootApplications + '/' + appName + '/' + appFileName);
     const componentInstanceSetting: Spider.ComponentInstanceSetting = JSON.parse(appString);
     return await CreateComponentInstance(componentInstanceSetting, rootDiv);
 };

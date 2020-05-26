@@ -39,7 +39,7 @@ class SpiderVueComponent extends ComponentInstance {
             const scripts: string[] = [
                 'Libs/vue/dist/vue.min.js',
                 'Libs/element-ui/lib/index.js',
-                'Vue/' + setting.config.type + '/' + setting.config.type +'.umd.min.js'
+                'VueComponents/' + setting.config.type + '/' + setting.config.type +'.umd.min.js'
             ];
             const csses: string[] = [
                 'Libs/element-ui/lib/theme-chalk/index.css'

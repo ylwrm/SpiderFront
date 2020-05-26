@@ -1,5 +1,5 @@
 class XmlUtility {
-    public static Xml2json(data: string, arrayChecker: (node: Element) => boolean) {
+    public static Xml2Json(data: string, arrayChecker: (node: Element) => boolean) {
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(data, 'text/xml');
         const root = xmlDoc.children[0];

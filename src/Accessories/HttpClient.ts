@@ -1,5 +1,5 @@
 class HttpClient {
-    public static get(url: string) {
+    public static Get(url: string) {
         const promise = new Promise<string>((resolve) => {
             var anHttpRequest = new XMLHttpRequest();
             anHttpRequest.onreadystatechange = () => {

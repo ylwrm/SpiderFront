@@ -1,7 +1,7 @@
 class FileSystem {
     public static async GetFileSystems(url: string) {
         let fses: Accessory.FileSystemItem[] = [];
-        const resp = await HttpClient.get(url + '/' + '__fs.json');
+        const resp = await HttpClient.Get(url + '/' + '__fs.json');
         fses = JSON.parse(resp) ;
         return fses;
 

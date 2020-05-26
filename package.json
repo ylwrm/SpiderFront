@@ -6,14 +6,18 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "http-server dist",
     "dist": "tsc && node dist.js",
-    "buildDemoLib": "vue-cli-service build --mode development --target lib --dest dist/Vue/SpiderVueDemoLib --name SpiderVueDemoLib src/Vue/SpiderVueDemoLib.vue",
-    "buildSplitContainer": "vue-cli-service build --mode development --target lib --dest dist/Vue/SpiderVueSplitContainer --name SpiderVueSplitContainer src/Vue/SpiderVueSplitContainer.vue"
+    "tscVue": "tsc && node dist.js",
+    "buildSplitContainer": "vue-cli-service build --mode development --target lib --dest dist/VueComponents/SpiderVueSplitContainer --name SpiderVueSplitContainer src/Vue/SpiderVueSplitContainer.vue",
+    "buildDemoLib": "vue-cli-service build --mode development --target lib --dest dist/VueComponents/SpiderVueDemoLib --name SpiderVueDemoLib src/Vue/SpiderVueDemoLib.vue",
+    "buildDemoTs": "vue-cli-service build --mode development --target lib --dest dist/VueComponents/SpiderVueDemoTs --name SpiderVueDemoTs src/Vue/SpiderVueDemoTs/SpiderVueDemoTs.vue"
   },
   "dependencies": {
     "es6-promise": "4.2.8",
     "handsontable": "6.2.2",
     "vue": "2.6.11",
-    "element-ui": "2.13.2"
+    "element-ui": "2.13.2",
+    "vue-class-component": "7.2.3",
+    "vue-property-decorator": "8.4.2"
   },
   "devDependencies": {
     "ncp": "2.0.0",
@@ -21,7 +25,9 @@
     "path": "0.12.7",
     "fs": "0.0.1-security",
     "@vue/cli-service": "4.3.1",
-    "vue-template-compiler": "2.6.11"
+    "@vue/cli-plugin-typescript": "4.3.1",
+    "vue-template-compiler": "2.6.11",
+    "typescript": "3.9.2"
   },
   "repository": {
     "type": "git",
