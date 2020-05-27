@@ -10,7 +10,7 @@ interface SpiderVueComponentInstanceSetting {
 class SpiderVueComponent extends ComponentInstance {
     private div: HTMLDivElement;
     private setting: SpiderVueComponentInstanceSetting;
-    private bigString = new Array(5000000);
+    private vueInst: Vue;
 
     constructor(div: HTMLDivElement, setting: SpiderVueComponentInstanceSetting) {
         super();
@@ -18,9 +18,9 @@ class SpiderVueComponent extends ComponentInstance {
         this.setting = setting;
 
         const vueType = Vue.extend(window[setting.config.type]);
-        const vueInst = new vueType().$mount();
-        console.log(vueInst);
-        this.div.appendChild(vueInst.$el);
+        this.vueInst = new vueType().$mount();
+        
+        this.div.appendChild(this.vueInst.$el);
     };
 
     ///
@@ -56,6 +56,9 @@ class SpiderVueComponent extends ComponentInstance {
 
     ///
     destroy = async () => {
+        if(this.vueInst){
+            this.vueInst.$destroy();
+        }
         if (this.div) {
             this.div.parentElement?.removeChild(this.div);
         }
