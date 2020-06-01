@@ -1,4 +1,6 @@
 class SpiderTable extends ComponentInstance {
+    public name: string | undefined;
+    public parent: ComponentInstance | undefined;
     private div: HTMLDivElement;
     private setting: Spider.ComponentInstanceSetting;
     

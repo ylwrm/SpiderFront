@@ -1,5 +1,5 @@
 
-interface SpiderCombinationInstanceSetting {
+interface SpiderCombinationInstanceSetting extends Spider.ComponentInstanceSetting {
     name: string;
     type: string;
     config: {
@@ -7,9 +7,11 @@ interface SpiderCombinationInstanceSetting {
     };
 }
 class SpiderCombination extends ComponentInstance {
+    public name: string | undefined;
+    public parent: ComponentInstance | undefined;
     public ControlInsts: ComponentInstance[] = [];
     private div: HTMLDivElement;
-    private setting: Spider.ComponentInstanceSetting;
+    private setting: SpiderCombinationInstanceSetting;
     
     constructor(div: HTMLDivElement, setting: SpiderCombinationInstanceSetting) {
         super();
@@ -22,6 +24,8 @@ class SpiderCombination extends ComponentInstance {
             const control = this.setting.config.controls[iC];
             const controlInst = await CreateComponentInstance(control, this.div);
             if (controlInst) {
+                controlInst.parent = this;
+                controlInst.name = control.name;
                 this.ControlInsts.push(controlInst);
             }
         }

@@ -1,4 +1,6 @@
 class SpiderVueDemo extends ComponentInstance {
+    public name: string | undefined;
+    public parent: ComponentInstance | undefined;
     private div: HTMLDivElement;
     private setting: Spider.ComponentInstanceSetting;
     private bigString = new Array(5000000);

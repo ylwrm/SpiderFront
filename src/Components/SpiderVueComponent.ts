@@ -8,6 +8,8 @@ interface SpiderVueComponentInstanceSetting {
 }
 
 class SpiderVueComponent extends ComponentInstance {
+    public name: string | undefined;
+    public parent: ComponentInstance | undefined;
     private div: HTMLDivElement;
     private setting: SpiderVueComponentInstanceSetting;
     private vueInst: Vue;
