@@ -7,6 +7,7 @@ interface SpiderCombinationInstanceSetting extends Spider.ComponentInstanceSetti
     };
 }
 class SpiderCombination extends ComponentInstance {
+    Update?: ((option?: any) => Promise<void>) | undefined;
     public name: string | undefined;
     public parent: ComponentInstance | undefined;
     public ControlInsts: ComponentInstance[] = [];
@@ -28,6 +29,10 @@ class SpiderCombination extends ComponentInstance {
                 controlInst.name = control.name;
                 this.ControlInsts.push(controlInst);
             }
+        }
+        for (let iC = 0; iC < this.ControlInsts.length; iC++) {
+            const inst = this.ControlInsts[iC];
+            inst.Update?.();
         }
     };
     ///

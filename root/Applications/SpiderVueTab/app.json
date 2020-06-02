@@ -2,13 +2,35 @@
     "name": "DemoApp",
     "type": "SpiderCombination",
     "config": {
-        "controls":[
+        "controls": [
             {
-                "name": "SpiderVueComponent",
+                "name": "Ts2",
                 "type": "SpiderVueComponent",
                 "config": {
-                    "type": "SpiderVueTab"
+                    "type": "SpiderVueDemoTs2"
                 }
+            },
+            {
+                "name": "Tab",
+                "type": "SpiderVueComponent",
+                "config": {
+                    "type": "SpiderVueTab",
+                    "tabs": [
+                        {
+                            "title": "Table",
+                            "name": "Table"
+                        },
+                        {
+                            "title": "Ts2",
+                            "name": "Ts2"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Table",
+                "type": "SpiderTable",
+                "config": {}
             }
         ]
     }

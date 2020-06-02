@@ -5,7 +5,9 @@
     margin: 0px;
     overflow: hidden;
 }
-
+body{
+    font-family: -webkit-pictograph;
+}
 button:hover {
     background-color: #4caf50;
     color: #fff;

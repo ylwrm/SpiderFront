@@ -1,4 +1,5 @@
 class SpiderVueDemo extends ComponentInstance {
+    Update?: ((option?: any) => Promise<void>) | undefined;
     public name: string | undefined;
     public parent: ComponentInstance | undefined;
     private div: HTMLDivElement;

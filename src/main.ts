@@ -16,6 +16,7 @@ async function CreateComponentInstance(componentInstanceSetting: Spider.Componen
     const instDiv = document.createElement('div');
     instDiv.style.width = '100%';
     instDiv.style.height = '100%';
+    // rootDiv.insertBefore(instDiv, rootDiv.firstChild);
     rootDiv.appendChild(instDiv);
     app = await (window[type] as typeof ComponentInstance).createInstance(instDiv, componentInstanceSetting);
     return app;

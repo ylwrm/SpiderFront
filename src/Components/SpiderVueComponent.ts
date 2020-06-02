@@ -8,6 +8,17 @@ interface SpiderVueComponentInstanceSetting {
 }
 
 class SpiderVueComponent extends ComponentInstance {
+    public Update = async ()=>{
+        console.log('SpiderVueComponent Update')
+        console.log(this.vueInst)
+        if(this.vueInst.$props){
+            this.vueInst.$props.ComponentInstance = this;
+        }
+        if((this.vueInst as any).Update){
+            (this.vueInst as any).Update();
+        }
+        // (this.vueInst as any).Update?.();
+    }
     public name: string | undefined;
     public parent: ComponentInstance | undefined;
     private div: HTMLDivElement;
@@ -23,6 +34,7 @@ class SpiderVueComponent extends ComponentInstance {
         this.vueInst = new vueType().$mount();
         
         this.div.appendChild(this.vueInst.$el);
+        // console.log(this.vueInst);
     };
 
     ///

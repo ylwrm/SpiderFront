@@ -11,5 +11,7 @@ abstract class ComponentInstance {
     ///
     public abstract name: string|undefined = undefined;
     ///
+    abstract Update?: (option?: any) => Promise<void>;
+    ///
     abstract destroy: (option?: any) => Promise<void>;
 }

@@ -1,10 +1,11 @@
 class SpiderTable extends ComponentInstance {
+    Update?: ((option?: any) => Promise<void>) | undefined;
     public name: string | undefined;
     public parent: ComponentInstance | undefined;
     private div: HTMLDivElement;
     private setting: Spider.ComponentInstanceSetting;
     
-    private bigString = new Array(5000000);
+    // private bigString = new Array(5000000);
     private table: Handsontable | undefined;
 
     constructor(div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) {
@@ -56,13 +57,16 @@ class SpiderTable extends ComponentInstance {
             rowHeaders: true,
             colHeaders: true,
             width: rect?.width,
-            height: rect?.height
+            height: rect?.height,
+            manualColumnResize: true,
+            manualRowResize: true
         });
         window.addEventListener('resize', this.resizeHandler);
     };
 
     ///
     private resizeHandler = () => {
+        console.log('resizeHandler');
         const rect = this.div.parentElement?.getBoundingClientRect();
         this.table?.updateSettings({
             width: rect?.width,
