@@ -1,4 +1,3 @@
-import { Component, Prop, Vue } from 'vue-property-decorator';
 interface VueComponentInstance {
     name?: string | undefined;
     parent?: SpiderCombination | undefined;

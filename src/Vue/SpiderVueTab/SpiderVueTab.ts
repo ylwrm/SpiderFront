@@ -1,5 +1,4 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { SpiderVueBase, VueComponentInstance } from '../SpiderVueBase';
 interface SpiderVueTabComponentInstance extends VueComponentInstance {
   name?: string | undefined;
   parent?: SpiderCombination | undefined;
