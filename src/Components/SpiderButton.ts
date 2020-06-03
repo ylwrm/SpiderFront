@@ -29,7 +29,7 @@ class SpiderButton extends ComponentInstance {
         this.div.appendChild(this.button);
         this.button.addEventListener('click',(ev)=>{
             this.div.dispatchEvent(new CustomEvent('Click',{
-                bubbles: true,
+                // bubbles: true,
                 detail: this.button.textContent
             }));
         });
