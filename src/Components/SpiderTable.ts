@@ -1,15 +1,16 @@
 class SpiderTable extends ComponentInstance {
     Update?: ((option?: any) => Promise<void>) | undefined;
-    public name: string | undefined;
-    public parent: SpiderCombination | undefined;
-    private div: HTMLDivElement;
-    private setting: Spider.ComponentInstanceSetting;
     
     // private bigString = new Array(5000000);
     private table: Handsontable | undefined;
 
-    constructor(div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) {
-        super();
+    constructor(
+        public div: HTMLDivElement,
+        public setting: Spider.ComponentInstanceSetting,
+        public name?: string,
+        public parent?: SpiderCombination
+    ) {
+        super(div, setting, name, parent);
         this.div = div;
         this.setting = setting;
 
@@ -62,8 +63,8 @@ class SpiderTable extends ComponentInstance {
             manualRowResize: true
         });
         window.addEventListener('resize', this.resizeHandler);
-    };
-
+    }
+    
     ///
     private resizeHandler = () => {
         console.log('resizeHandler');

@@ -1,17 +1,15 @@
 class SpiderRouter extends ComponentInstance {
     Update?: ((option?: any) => Promise<void>) | undefined;
-    public name: string | undefined;
-    public parent: SpiderCombination | undefined;
-    private div: HTMLDivElement;
-    private setting: Spider.ComponentInstanceSetting;
-
-    constructor(div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) {
-        super();
-        this.div = div;
-        this.setting = setting;
-
-    };
-
+    
+    constructor(
+        public div: HTMLDivElement,
+        public setting: Spider.ComponentInstanceSetting,
+        public name?: string,
+        public parent?: SpiderCombination
+    ) {
+        super(div, setting, name, parent);
+    }
+    
     ///
     static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance | undefined>
         =

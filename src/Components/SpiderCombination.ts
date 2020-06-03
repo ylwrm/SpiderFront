@@ -13,16 +13,16 @@ class SpiderCombination extends ComponentInstance {
             inst.Update?.();
         }
     }
-    public name: string | undefined;
-    public parent: SpiderCombination | undefined;
+
     public ControlInsts: ComponentInstance[] = [];
-    private div: HTMLDivElement;
-    private setting: SpiderCombinationInstanceSetting;
     
-    constructor(div: HTMLDivElement, setting: SpiderCombinationInstanceSetting) {
-        super();
-        this.div = div;
-        this.setting = setting;
+    constructor(
+        public div: HTMLDivElement,
+        public setting: SpiderCombinationInstanceSetting,
+        public name?: string,
+        public parent?: SpiderCombination
+    ) {
+        super(div, setting, name, parent);
     }
     ///
     private setup = async ()=>{

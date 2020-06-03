@@ -20,7 +20,7 @@ const SpiderDemoBusiness = (thiscontrol: ComponentInstance) => {
         console.log(tab.vueInst.$props);
         console.log(tab.vueInst.ComponentInstance);
         textBox.Value = ev.detail;
-    })
+    });
     console.log('--- SpiderDemoBusiness ---');
 }
 

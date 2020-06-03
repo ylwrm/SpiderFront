@@ -7,33 +7,30 @@ interface SpiderButtonInstanceSetting extends Spider.ComponentInstanceSetting {
 class SpiderButton extends ComponentInstance {
     public Update = async ()=>{
     }
-    public name: string | undefined;
-    public parent: SpiderCombination | undefined;
-    
-    private div: HTMLDivElement;
-    private setting: SpiderButtonInstanceSetting;
 
     private button: HTMLButtonElement;
     
     public addEventListener = (type: 'Click'|'RightClick', listener: (this: HTMLElement, ev: CustomEvent<string>) => any)=>{
         this.div.addEventListener(type as any, listener as any);
     }
-
-    constructor(div: HTMLDivElement, setting: SpiderButtonInstanceSetting) {
-        super();
-        this.div = div;
-        this.setting = setting;
-        this.button = document.createElement('button');
-        this.button.textContent = 'buttonX';
-        this.button.style.width = '100%';
-        this.div.appendChild(this.button);
-        this.button.addEventListener('click',(ev)=>{
-            this.div.dispatchEvent(new CustomEvent('Click',{
-                // bubbles: true,
-                detail: this.button.textContent
-            }));
-        });
-    }
+    constructor(
+        public div: HTMLDivElement,
+        public setting: SpiderButtonInstanceSetting,
+        public name?: string,
+        public parent?: SpiderCombination) {
+            super(div, setting, name, parent);
+            
+            this.button = document.createElement('button');
+            this.button.textContent = 'buttonX';
+            this.button.style.width = '100%';
+            this.div.appendChild(this.button);
+            this.button.addEventListener('click',(ev)=>{
+                this.div.dispatchEvent(new CustomEvent('Click',{
+                    // bubbles: true,
+                    detail: this.button.textContent
+                }));
+            });
+        }
     
     ///
     private setup = async () => {

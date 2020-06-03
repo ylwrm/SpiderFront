@@ -1,15 +1,14 @@
 class SpiderVueDemo extends ComponentInstance {
     Update?: ((option?: any) => Promise<void>) | undefined;
-    public name: string | undefined;
-    public parent: SpiderCombination | undefined;
-    private div: HTMLDivElement;
-    private setting: Spider.ComponentInstanceSetting;
     // private bigString = new Array(5000000);
 
-    constructor(div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) {
-        super();
-        this.div = div;
-        this.setting = setting;
+    constructor(
+        public div: HTMLDivElement,
+        public setting: Spider.ComponentInstanceSetting,
+        public name?: string,
+        public parent?: SpiderCombination
+    ) {
+        super(div, setting, name, parent);
         this.div.innerHTML = `
             <el-button @click="visible = true">Button</el-button>
             <el-dialog :visible.sync="visible" title="Hello world">
@@ -22,7 +21,7 @@ class SpiderVueDemo extends ComponentInstance {
                 return { visible: false }
             }
         });
-    };
+    }
 
     ///
     static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance | undefined>

@@ -1,7 +1,8 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
-interface ComponentInstance {
+import { SpiderVueBase, VueComponentInstance } from '../SpiderVueBase';
+interface SpiderVueTabComponentInstance extends VueComponentInstance {
   name?: string | undefined;
-  parent?: ComponentInstance | undefined;
+  parent?: SpiderCombination | undefined;
   div?: HTMLDivElement;
   setting:
   {
@@ -17,9 +18,9 @@ interface ComponentInstance {
   };
 }
 @Component
-export default class SpiderVueTab extends Vue {
+export default class SpiderVueTab extends Vue implements SpiderVueBase {
   @Prop()
-  public ComponentInstance: ComponentInstance = {
+  public ComponentInstance: SpiderVueTabComponentInstance = {
     setting: {
       name: "Tab",
       type: "SpiderVueComponent",
@@ -62,33 +63,35 @@ export default class SpiderVueTab extends Vue {
       }
     }, 100);
   }
-  
-  get testVueGet() : string {
+
+  get testVueGet(): string {
     return 'testVueGet';
   }
-  
-  testVueMethod(){
+
+  testVueMethod() {
     return this;
   }
   Update() {
     this.$nextTick(() => {
-      const ControlInsts = (this.ComponentInstance.parent as any).ControlInsts as ComponentInstance[];
-      for (let iC = 0; iC < ControlInsts.length; iC++) {
-        const ci = ControlInsts[iC];
-        for (let iT = 0; iT < this.ComponentInstance.setting.config.tabs.length; iT++) {
-          const tab = this.ComponentInstance.setting.config.tabs[iT];
-          if (tab.name === ci.name) {
-            console.log('====');
-            const div = this.$refs[tab.name][0] as HTMLDivElement;
-            console.log(div);
-            console.log(ci.div);
-            if (ci.div) {
-              div.appendChild(ci.div);
+      if (this.ComponentInstance.parent) {
+        const ControlInsts = this.ComponentInstance.parent.ControlInsts;
+        for (let iC = 0; iC < ControlInsts.length; iC++) {
+          const ci = ControlInsts[iC];
+          for (let iT = 0; iT < this.ComponentInstance.setting.config.tabs.length; iT++) {
+            const tab = this.ComponentInstance.setting.config.tabs[iT];
+            if (tab.name === ci.name) {
+              console.log('====');
+              const div = this.$refs[tab.name][0] as HTMLDivElement;
+              console.log(div);
+              console.log(ci.div);
+              if (ci.div) {
+                div.appendChild(ci.div);
+              }
             }
           }
         }
+        this.handleClick();
       }
-      this.handleClick();
     });
   }
 }

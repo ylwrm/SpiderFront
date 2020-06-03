@@ -7,11 +7,6 @@ interface SpiderTextBoxInstanceSetting extends Spider.ComponentInstanceSetting {
 class SpiderTextBox extends ComponentInstance {
     public Update = async ()=>{
     }
-    public name: string | undefined;
-    public parent: SpiderCombination | undefined;
-    
-    private div: HTMLDivElement;
-    private setting: SpiderTextBoxInstanceSetting;
 
     private input: HTMLInputElement;
     
@@ -23,9 +18,13 @@ class SpiderTextBox extends ComponentInstance {
         this.input.value = v;
     }
     
-
-    constructor(div: HTMLDivElement, setting: SpiderTextBoxInstanceSetting) {
-        super();
+    constructor(
+        public div: HTMLDivElement,
+        public setting: SpiderTextBoxInstanceSetting,
+        public name?: string,
+        public parent?: SpiderCombination
+    ) {
+        super(div, setting, name, parent);
         this.div = div;
         this.setting = setting;
         this.input = document.createElement('input');

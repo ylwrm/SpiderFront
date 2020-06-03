@@ -19,14 +19,15 @@ class SpiderVueComponent<T extends Vue> extends ComponentInstance {
         }
         // (this.vueInst as any).Update?.();
     }
-    public name: string | undefined;
-    public parent: SpiderCombination | undefined;
-    private div: HTMLDivElement;
-    private setting: SpiderVueComponentInstanceSetting;
+    
     public vueInst: T;
-
-    constructor(div: HTMLDivElement, setting: SpiderVueComponentInstanceSetting) {
-        super();
+    constructor(
+        public div: HTMLDivElement,
+        public setting: SpiderVueComponentInstanceSetting,
+        public name?: string,
+        public parent?: SpiderCombination
+    ) {
+        super(div, setting, name, parent);
         this.div = div;
         this.setting = setting;
 
@@ -34,8 +35,7 @@ class SpiderVueComponent<T extends Vue> extends ComponentInstance {
         this.vueInst = new vueType().$mount() as any;
         
         this.div.appendChild(this.vueInst.$el);
-        // console.log(this.vueInst);
-    };
+    }
 
     ///
     static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance | undefined>
