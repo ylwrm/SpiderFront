@@ -7,7 +7,7 @@ abstract class ComponentInstance {
         return undefined;
     };
     ///
-    public abstract parent: ComponentInstance|undefined = undefined;
+    public abstract parent: SpiderCombination|undefined = undefined;
     ///
     public abstract name: string|undefined = undefined;
     ///

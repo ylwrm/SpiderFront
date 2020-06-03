@@ -1,7 +1,7 @@
 class SpiderTable extends ComponentInstance {
     Update?: ((option?: any) => Promise<void>) | undefined;
     public name: string | undefined;
-    public parent: ComponentInstance | undefined;
+    public parent: SpiderCombination | undefined;
     private div: HTMLDivElement;
     private setting: Spider.ComponentInstanceSetting;
     

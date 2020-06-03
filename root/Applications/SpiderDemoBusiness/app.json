@@ -1,0 +1,49 @@
+{
+    "name": "SpiderDemoBusiness",
+    "type": "SpiderCombination",
+    "config": {
+        "controls": [
+            {
+                "name": "Ts2",
+                "type": "SpiderVueComponent",
+                "config": {
+                    "type": "SpiderVueDemoTs2"
+                }
+            },
+            {
+                "name": "Tab",
+                "type": "SpiderVueComponent",
+                "config": {
+                    "type": "SpiderVueTab",
+                    "tabs": [
+                        {
+                            "title": "Table",
+                            "name": "Table"
+                        },
+                        {
+                            "title": "Ts2",
+                            "name": "Ts2"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Table",
+                "type": "SpiderTable",
+                "config": {}
+            },
+            {
+                "name": "Business",
+                "type": "SpiderBusiness",
+                "config": {
+                    "scripts": [
+                        {
+                            "js": "Businesses/SpiderDemoBusiness/SpiderDemoBusiness.js",
+                            "name": "SpiderDemoBusiness"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

@@ -20,7 +20,7 @@ class SpiderVueComponent extends ComponentInstance {
         // (this.vueInst as any).Update?.();
     }
     public name: string | undefined;
-    public parent: ComponentInstance | undefined;
+    public parent: SpiderCombination | undefined;
     private div: HTMLDivElement;
     private setting: SpiderVueComponentInstanceSetting;
     private vueInst: Vue;

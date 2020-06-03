@@ -1,35 +1,23 @@
-class SpiderVueDemo extends ComponentInstance {
+class SpiderRouter extends ComponentInstance {
     Update?: ((option?: any) => Promise<void>) | undefined;
     public name: string | undefined;
     public parent: SpiderCombination | undefined;
     private div: HTMLDivElement;
     private setting: Spider.ComponentInstanceSetting;
-    // private bigString = new Array(5000000);
 
     constructor(div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) {
         super();
         this.div = div;
         this.setting = setting;
-        this.div.innerHTML = `
-            <el-button @click="visible = true">Button</el-button>
-            <el-dialog :visible.sync="visible" title="Hello world">
-                <p>Try Element</p>
-            </el-dialog>
-        `;
-        new Vue({
-            el: this.div,
-            data: function () {
-                return { visible: false }
-            }
-        });
+
     };
 
     ///
     static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance | undefined>
         =
         async (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => {
-            await SpiderVueDemo.prepare();
-            const obj = new SpiderVueDemo(div, setting);
+            await SpiderRouter.prepare();
+            const obj = new SpiderRouter(div, setting);
             return obj;
         };
 
@@ -38,11 +26,10 @@ class SpiderVueDemo extends ComponentInstance {
         =
         async () => {
             const scripts: string[] = [
-                "Libs/vue/dist/vue.min.js",
-                "Libs/element-ui/lib/index.js"
+                "Libs/handsontable/dist/handsontable.full.min.js"
             ];
             const csses: string[] = [
-                "Libs/element-ui/lib/theme-chalk/index.css"
+                "Libs/handsontable/dist/handsontable.full.min.css"
             ];
             for (let iS = 0; iS < scripts.length; iS++) {
                 const spt = scripts[iS];
@@ -56,8 +43,6 @@ class SpiderVueDemo extends ComponentInstance {
 
     ///
     destroy = async () => {
-        if (this.div) {
-            this.div.parentElement?.removeChild(this.div);
-        }
+        
     };
 }
