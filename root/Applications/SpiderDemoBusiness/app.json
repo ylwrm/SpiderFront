@@ -4,36 +4,45 @@
     "config": {
         "controls": [
             {
-                "name": "Ts2",
-                "type": "SpiderVueComponent",
+                "name": "SpiderButton",
+                "type": "SpiderButton",
                 "config": {
-                    "type": "SpiderVueDemoTs2"
                 }
             },
             {
-                "name": "Tab",
+                "name": "SpiderTextBox",
+                "type": "SpiderTextBox",
+                "config": {
+                }
+            },
+            {
+                "name": "SpiderVueComponent",
                 "type": "SpiderVueComponent",
                 "config": {
                     "type": "SpiderVueTab",
                     "tabs": [
                         {
-                            "title": "Table",
-                            "name": "Table"
+                            "title": "SpiderTextBox",
+                            "name": "SpiderTextBox"
                         },
                         {
-                            "title": "Ts2",
-                            "name": "Ts2"
+                            "title": "SpiderTable",
+                            "name": "SpiderTable"
+                        },
+                        {
+                            "title": "SpiderButton",
+                            "name": "SpiderButton"
                         }
                     ]
                 }
             },
             {
-                "name": "Table",
+                "name": "SpiderTable",
                 "type": "SpiderTable",
                 "config": {}
             },
             {
-                "name": "Business",
+                "name": "SpiderBusiness",
                 "type": "SpiderBusiness",
                 "config": {
                     "scripts": [
