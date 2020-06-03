@@ -1,0 +1,15 @@
+{
+    "name": "SpiderVueTypescriptComponent",
+    "type": "SpiderCombination",
+    "config": {
+        "controls":[
+            {
+                "name": "SpiderVueTypescriptComponent",
+                "type": "SpiderVueTypescriptComponent",
+                "config": {
+                    "type": "SpiderVueTypescriptTab"
+                }
+            }
+        ]
+    }
+}

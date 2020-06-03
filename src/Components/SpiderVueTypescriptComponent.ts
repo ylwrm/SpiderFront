@@ -1,0 +1,80 @@
+
+interface SpiderVueTypescriptComponentInstanceSetting {
+    name: string;
+    type: string;
+    config: {
+        type: string
+    };
+}
+
+class SpiderVueTypescriptComponent<T extends Vue> extends ComponentInstance {
+    public Update = async () => {
+        console.log('SpiderVueTypescriptComponent Update')
+        console.log(this.vueInst)
+        if (this.vueInst.$props) {
+            this.vueInst.$props.ComponentInstance = this;
+        }
+        if ((this.vueInst as any).Update) {
+            (this.vueInst as any).Update();
+        }
+        // (this.vueInst as any).Update?.();
+    }
+
+    public vueInst: T;
+    constructor(
+        public div: HTMLDivElement,
+        public setting: SpiderVueTypescriptComponentInstanceSetting,
+        public name?: string,
+        public parent?: SpiderCombination
+    ) {
+        super(div, setting, name, parent);
+        this.div = div;
+        this.setting = setting;
+
+        const vueType = Vue.extend(window[setting.config.type]);
+        this.vueInst = new vueType().$mount() as any;
+
+        this.div.appendChild(this.vueInst.$el);
+    }
+
+    ///
+    static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance | undefined>
+        =
+        async (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => {
+            await SpiderVueTypescriptComponent.prepare(div, setting);
+            const obj = new SpiderVueTypescriptComponent(div, setting);
+            return obj;
+        };
+
+    ///
+    static prepare: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<void>
+        =
+        async (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => {
+            const scripts: string[] = [
+                'Libs/vue/dist/vue.min.js',
+                'Libs/element-ui/lib/index.js',
+                'VueTypescript/' + setting.config.type + '.js'
+            ];
+            const csses: string[] = [
+                'Libs/element-ui/lib/theme-chalk/index.css'
+            ];
+            for (let iS = 0; iS < scripts.length; iS++) {
+                const spt = scripts[iS];
+                await DomLoader.LoadScript(spt);
+            }
+            for (let iS = 0; iS < csses.length; iS++) {
+                const css = csses[iS];
+                await DomLoader.LoadCss(css);
+            }
+        };
+
+    ///
+    destroy = async () => {
+        if (this.vueInst) {
+            this.vueInst.$destroy();
+        }
+        if (this.div) {
+            this.div.parentElement?.removeChild(this.div);
+        }
+    };
+}
