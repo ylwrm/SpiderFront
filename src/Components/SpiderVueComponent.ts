@@ -7,7 +7,7 @@ interface SpiderVueComponentInstanceSetting {
     };
 }
 
-class SpiderVueComponent extends ComponentInstance {
+class SpiderVueComponent<T extends Vue> extends ComponentInstance {
     public Update = async ()=>{
         console.log('SpiderVueComponent Update')
         console.log(this.vueInst)
@@ -23,7 +23,7 @@ class SpiderVueComponent extends ComponentInstance {
     public parent: SpiderCombination | undefined;
     private div: HTMLDivElement;
     private setting: SpiderVueComponentInstanceSetting;
-    private vueInst: Vue;
+    public vueInst: T;
 
     constructor(div: HTMLDivElement, setting: SpiderVueComponentInstanceSetting) {
         super();
@@ -31,7 +31,7 @@ class SpiderVueComponent extends ComponentInstance {
         this.setting = setting;
 
         const vueType = Vue.extend(window[setting.config.type]);
-        this.vueInst = new vueType().$mount();
+        this.vueInst = new vueType().$mount() as any;
         
         this.div.appendChild(this.vueInst.$el);
         // console.log(this.vueInst);

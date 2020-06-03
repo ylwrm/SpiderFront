@@ -62,6 +62,14 @@ export default class SpiderVueTab extends Vue {
       }
     }, 100);
   }
+  
+  get testVueGet() : string {
+    return 'testVueGet';
+  }
+  
+  testVueMethod(){
+    return this;
+  }
   Update() {
     this.$nextTick(() => {
       const ControlInsts = (this.ComponentInstance.parent as any).ControlInsts as ComponentInstance[];
