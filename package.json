@@ -9,7 +9,8 @@
     "buildDemoLib": "vue-cli-service build --mode development --target lib --dest dist/VueComponents/SpiderVueDemoLib --name SpiderVueDemoLib src/Vue/SpiderVueDemoLib.vue",
     "buildDemoTs": "vue-cli-service build --mode development --target lib --dest dist/VueComponents/SpiderVueDemoTs --name SpiderVueDemoTs src/Vue/SpiderVueDemoTs/SpiderVueDemoTs.vue",
     "buildDemoTs2": "vue-cli-service build --mode development --target lib --dest dist/VueComponents/SpiderVueDemoTs2 --name SpiderVueDemoTs2 src/Vue/SpiderVueDemoTs2/SpiderVueDemoTs2.vue",
-    "buildVueTab": "vue-cli-service build --mode development --target lib --dest dist/VueComponents/SpiderVueTab --name SpiderVueTab src/Vue/SpiderVueTab/SpiderVueTab.vue"
+    "buildSpiderVueTab": "vue-cli-service build --mode development --target lib --dest dist/VueComponents/SpiderVueTab --name SpiderVueTab src/Vue/SpiderVueTab/SpiderVueTab.vue",
+    "buildSpiderVueTable": "vue-cli-service build --mode development --target lib --dest dist/VueComponents/SpiderVueTable --name SpiderVueTable src/Vue/SpiderVueTable/SpiderVueTable.vue"
   },
   "dependencies": {
     "es6-promise": "4.2.8",

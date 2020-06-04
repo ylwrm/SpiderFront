@@ -13,5 +13,5 @@ interface VueComponentInstance {
     };
 }
 interface SpiderVueBase {
-    ComponentInstance: VueComponentInstance;
+    ComponentInstance: VueComponentInstance|undefined;
 }

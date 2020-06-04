@@ -19,7 +19,7 @@ interface SpiderVueTabComponentInstance extends VueComponentInstance {
 @Component
 export default class SpiderVueTab extends Vue implements SpiderVueBase {
   @Prop()
-  public ComponentInstance: SpiderVueTabComponentInstance = {
+  public ComponentInstance: SpiderVueTabComponentInstance|undefined = {
     setting: {
       name: "Tab",
       type: "SpiderVueComponent",
@@ -72,7 +72,7 @@ export default class SpiderVueTab extends Vue implements SpiderVueBase {
   }
   Update() {
     this.$nextTick(() => {
-      if (this.ComponentInstance.parent) {
+      if (this.ComponentInstance?.parent) {
         const ControlInsts = this.ComponentInstance.parent.ControlInsts;
         for (let iC = 0; iC < ControlInsts.length; iC++) {
           const ci = ControlInsts[iC];

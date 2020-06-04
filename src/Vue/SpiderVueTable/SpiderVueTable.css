@@ -1,0 +1,163 @@
+.table {
+  width: 100%;
+  height: calc(100% - 50px) !important;
+}
+.tableParent {
+  /* border-top: 1px solid #ebeef5; */
+  padding: 0 30px;
+  box-sizing: border-box;
+}
+.pagination {
+  float: right;
+  margin-top: 10px;
+}
+.tableorder {
+  background-color: #e6eefe;
+  border-radius: 60%;
+}
+.el-table__body tr.hover-row > td {
+  background-color: #f0f3ff;
+}
+
+.el-table__body tr.hover-row > td:first-child {
+  border-left: 3px solid #4063ff;
+  box-sizing: border-box;
+}
+.el-table__body tr.hover-row > td {
+  background-color: #f0f3ff !important;
+}
+
+/*  tr.hover-row:hover > td {
+    background-color: #f0f3ff !important;
+  } */
+/* 
+    .el-table--enable-row-hover
+    .el-table--striped
+    .el-table__body
+    tr:hover
+    > td {
+    background-color: #f0f3ff !important;
+  } */
+/*  .el-table--enable-row-hover .el-table__body tr:hover > td:first-child {
+    border-left: 3px solid #4063ff;
+    box-sizing: border-box;
+  } */
+.el-table__body-wrapper {
+  height: calc(100% - 50px) !important;
+}
+/* 预警图片大小设置 */
+.warn,
+.tableImage {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+.tableImage {
+  margin-right: 10px;
+}
+.sort {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+/* 解决固定列之后,table展开行的问题 */
+.el-table .el-table__fixed td.is-hidden {
+  visibility: hidden;
+}
+.el-table .el-table__fixed-right td.is-hidden {
+  visibility: hidden;
+}
+.el-table .el-table__fixed th.is-hidden {
+  visibility: hidden;
+}
+.el-table .el-table__fixed-right th.is-hidden {
+  visibility: hidden;
+}
+.el-table__fixed,
+.el-table__fixed-right {
+  overflow-x: visible;
+  pointer-events: none;
+  overflow-y: visible;
+}
+.el-table__fixed-right table tr:not(.is-hidden) {
+  pointer-events: all;
+}
+.el-table__fixed table tr:not(.is-hidden) {
+  pointer-events: all;
+}
+::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 4px;
+  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 5px;
+  box-shadow: inset 0 0 5px rgba(200, 200, 200, 0.2);
+  -webkit-box-shadow: inset 0 0 5px rgba(200, 200, 200, 0.2);
+  background: rgba(200, 200, 200, 0.2);
+}
+
+::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 1);
+  -webkit-box-shadow: inset 0 0 5px rgba(255, 255, 255, 1);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 1);
+}
+.el-link.el-link--primary {
+  width: 100%;
+  color: #4063ff;
+}
+.el-link.el-link--primary .el-link--inner {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* 斑马纹底色 */
+.el-table--striped .el-table__body tr.el-table__row--striped td {
+  background: #f8f9fa;
+}
+.el-table td,
+.el-table th.is-leaf {
+  border-bottom: unset;
+}
+
+/* 修改分页标签样式 */
+.el-pagination {
+  font-weight: 400;
+}
+.el-pager li.active {
+  color: #4063ff;
+}
+.el-pager li {
+  color: #5b6b83;
+}
+.el-table__fixed::before {
+  background-color: unset;
+}
+::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 4px;
+  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 5px;
+  box-shadow: inset 0 0 5px rgba(200, 200, 200, 0.2);
+  -webkit-box-shadow: inset 0 0 5px rgba(200, 200, 200, 0.2);
+  background: rgba(200, 200, 200, 0.2);
+}
+
+::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 1);
+  -webkit-box-shadow: inset 0 0 5px rgba(255, 255, 255, 1);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 1);
+}
