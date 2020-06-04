@@ -1,8 +1,8 @@
 class SpiderTable extends ComponentInstance {
-    public update = async ()=>{
+    public update = async () => {
     }
 
-    
+
     // private bigString = new Array(5000000);
     private table: Handsontable | undefined;
 
@@ -54,29 +54,48 @@ class SpiderTable extends ComponentInstance {
             ['2021', 30, 15, 12, 13]
         ];
 
-        const rect = this.div.parentElement?.getBoundingClientRect();
-        this.table = new Handsontable(this.div, {
+        const handDiv = document.createElement('div');
+        handDiv.style.width = '100%';
+        handDiv.style.height = '100%';
+        handDiv.style.boxSizing = 'border-box';
+        this.div.appendChild(handDiv);
+        const rect = this.getNetRect(this.div);
+        this.table = new Handsontable(handDiv, {
             data: data,
             rowHeaders: true,
             colHeaders: true,
-            width: rect?.width,
-            height: rect?.height,
+            width: rect.width,
+            height: rect.height,
             manualColumnResize: true,
             manualRowResize: true
         });
         window.addEventListener('resize', this.resizeHandler);
     }
-    
+
     ///
     private resizeHandler = () => {
         console.log('resizeHandler');
-        const rect = this.div.parentElement?.getBoundingClientRect();
+        const rect = this.getNetRect(this.div);
         this.table?.updateSettings({
-            width: rect?.width,
-            height: rect?.height
+            width: rect.width,
+            height: rect.height
         }, false);
     };
+    
+    ///
+    private getNetRect(element: HTMLElement) {
+        const computedStyle = getComputedStyle(element);
 
+        let elementHeight = element.clientHeight;  // height with padding
+        let elementWidth = element.clientWidth;   // width with padding
+
+        elementHeight -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
+        elementWidth -= parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
+        return {
+            height: elementHeight,
+            width: elementWidth
+        };
+    }
     ///
     static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance>
         =

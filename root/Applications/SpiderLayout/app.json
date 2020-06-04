@@ -1,0 +1,46 @@
+{
+    "name": "DemoApp",
+    "type": "SpiderCombination",
+    "config": {
+        "controls": [
+            {
+                "name": "SpiderLayout",
+                "type": "SpiderLayout",
+                "config": {
+                    "htmlUrl": "Htmls/SpiderDemoLayout.html",
+                    "maps": [
+                        {
+                            "selector": ".left",
+                            "name": "SpiderTable"
+                        },
+                        {
+                            "selector": ".righttop",
+                            "name": "SpiderTextBox"
+                        },
+                        {
+                            "selector": ".rightbottom",
+                            "name": "SpiderVueDemoTs2"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "SpiderVueDemoTs2",
+                "type": "SpiderVueComponent",
+                "config": {
+                    "type": "SpiderVueDemoTs2"
+                }
+            },
+            {
+                "name": "SpiderTable",
+                "type": "SpiderTable",
+                "config": {}
+            },
+            {
+                "name": "SpiderTextBox",
+                "type": "SpiderTextBox",
+                "config": {}
+            }
+        ]
+    }
+}

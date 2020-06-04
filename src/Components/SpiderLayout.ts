@@ -2,7 +2,13 @@
 interface SpiderLayoutSetting extends Spider.ComponentInstanceSetting {
     name: string;
     type: string;
-    config: any;
+    config: {
+        htmlUrl: string,
+        maps: {
+            selector: string,
+            name: string
+        }[]
+    };
 }
 class SpiderLayout extends ComponentInstance {
     ///
@@ -16,11 +22,17 @@ class SpiderLayout extends ComponentInstance {
     }
 
     ///
+    private setup = async () => {
+        const html = await HttpClient.Get(this.setting.config.htmlUrl);
+        this.div.innerHTML = html;
+    };
+    ///
     public static createInstance: (div: HTMLDivElement, setting: SpiderLayoutSetting) => Promise<ComponentInstance>
         =
         async (div: HTMLDivElement, setting: SpiderLayoutSetting) => {
             await SpiderLayout.prepare();
             const obj = new SpiderLayout(div, setting);
+            await obj.setup();
             return obj;
         };
 
@@ -46,6 +58,19 @@ class SpiderLayout extends ComponentInstance {
     public update
         =
         async () => {
+            if (this.parent) {
+                for (let iM = 0; iM < this.setting.config.maps.length; iM++) {
+                    const map = this.setting.config.maps[iM];
+                    const container = this.div.querySelector(map.selector);
+                    const inst = this.parent.ControlInsts.find(t => t.name === map.name);
+                    if (container && inst) {
+                        container.appendChild(inst.div);
+                    }
+                }
+                setTimeout(() => {
+                    window.dispatchEvent(new Event('resize'));
+                }, 100);
+            }
         };
 
     ///
