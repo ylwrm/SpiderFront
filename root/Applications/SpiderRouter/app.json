@@ -1,0 +1,47 @@
+{
+    "name": "DemoApp",
+    "type": "SpiderCombination",
+    "config": {
+        "controls": [
+            {
+                "name": "SpiderLayout",
+                "type": "SpiderLayout",
+                "config": {
+                    "htmlUrl": "Htmls/SpiderDemoLayout.html",
+                    "maps": [
+                        {
+                            "selector": ".left",
+                            "name": "SpiderTable"
+                        },
+                        {
+                            "selector": ".righttop",
+                            "name": "SpiderTextBox"
+                        },
+                        {
+                            "selector": ".rightbottom",
+                            "name": "SpiderRouter"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "SpiderTable",
+                "type": "SpiderTable",
+                "config": {}
+            },
+            {
+                "name": "SpiderRouter",
+                "type": "SpiderRouter",
+                "config": {
+                    "app": "SpiderDemoBusiness",
+                    "arg": ""
+                }
+            },
+            {
+                "name": "SpiderTextBox",
+                "type": "SpiderTextBox",
+                "config": {}
+            }
+        ]
+    }
+}

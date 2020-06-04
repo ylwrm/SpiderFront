@@ -26,13 +26,14 @@ async function CreateComponentInstance(componentInstanceSetting: Spider.Componen
 const initApp = async (rootDiv: HTMLDivElement, appName: string) => {
     const appString = await HttpClient.Get(rootApplications + '/' + appName + '/' + appFileName);
     const componentInstanceSetting: Spider.ComponentInstanceSetting = JSON.parse(appString);
-    return await CreateComponentInstance(componentInstanceSetting, rootDiv);
+    const app =await CreateComponentInstance(componentInstanceSetting, rootDiv);
+    app.update();
+    return app;
 };
 
 (async () => {
     if (appName) {
         app = await initApp(rootDiv, appName);
-        app.update();
     } else {
         const appRoots = (await FileSystem.GetFileSystems(rootApplications)).filter(t=>t.isDir);
         const btns: HTMLButtonElement[] = [];
@@ -55,7 +56,6 @@ const initApp = async (rootDiv: HTMLDivElement, appName: string) => {
                 // create app
                 appName = appRoot.name;
                 app = await initApp(rootDiv, appName);
-                app.update();
             };
             btn.addEventListener('click', clickHandler);
             btns.push(btn);

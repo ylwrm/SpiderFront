@@ -1,8 +1,17 @@
+
+interface SpiderRouterSetting extends Spider.ComponentInstanceSetting {
+    name: string;
+    type: string;
+    config: {
+        app: string,
+        arg: any
+    };
+}
 class SpiderRouter extends ComponentInstance {
     ///
-    constructor(
+    public constructor(
         public div: HTMLDivElement,
-        public setting: Spider.ComponentInstanceSetting,
+        public setting: SpiderRouterSetting,
         public name?: string,
         public parent?: SpiderCombination
     ) {
@@ -10,19 +19,16 @@ class SpiderRouter extends ComponentInstance {
     }
 
     ///
-    public update: () => Promise<void> = async () => {};
-    
-    ///
-    public static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance>
+    public static createInstance: (div: HTMLDivElement, setting: SpiderRouterSetting) => Promise<ComponentInstance>
         =
-        async (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => {
+        async (div: HTMLDivElement, setting: SpiderRouterSetting) => {
             await SpiderRouter.prepare();
             const obj = new SpiderRouter(div, setting);
             return obj;
         };
 
-    ///
-    public static prepare: () => Promise<void>
+    /// ***
+    private static prepare: () => Promise<void>
         =
         async () => {
             const scripts: string[] = [
@@ -40,7 +46,16 @@ class SpiderRouter extends ComponentInstance {
         };
 
     ///
-    destroy = async () => {
-        
-    };
+    public update
+        =
+        async () => {
+            initApp(this.div, this.setting.config.app);
+        };
+
+    ///
+    public destroy
+        =
+        async () => {
+            this.div.parentElement?.removeChild(this.div);
+        };
 }
