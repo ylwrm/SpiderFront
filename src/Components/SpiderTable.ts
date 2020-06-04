@@ -1,5 +1,7 @@
 class SpiderTable extends ComponentInstance {
-    Update?: ((option?: any) => Promise<void>) | undefined;
+    public update = async ()=>{
+    }
+
     
     // private bigString = new Array(5000000);
     private table: Handsontable | undefined;
@@ -76,7 +78,7 @@ class SpiderTable extends ComponentInstance {
     };
 
     ///
-    static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance | undefined>
+    static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance>
         =
         async (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => {
             await SpiderTable.prepare();

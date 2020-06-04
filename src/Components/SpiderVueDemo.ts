@@ -1,7 +1,9 @@
 class SpiderVueDemo extends ComponentInstance {
-    Update?: ((option?: any) => Promise<void>) | undefined;
-    // private bigString = new Array(5000000);
+    ///
+    public update = async ()=>{
+    }
 
+    ///
     constructor(
         public div: HTMLDivElement,
         public setting: Spider.ComponentInstanceSetting,
@@ -24,7 +26,7 @@ class SpiderVueDemo extends ComponentInstance {
     }
 
     ///
-    static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance | undefined>
+    static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance>
         =
         async (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => {
             await SpiderVueDemo.prepare();

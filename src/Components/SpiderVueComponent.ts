@@ -8,7 +8,7 @@ interface SpiderVueComponentInstanceSetting {
 }
 
 class SpiderVueComponent<T extends Vue> extends ComponentInstance {
-    public Update = async ()=>{
+    public update = async ()=>{
         console.log('SpiderVueComponent Update')
         console.log(this.vueInst)
         if(this.vueInst.$props){
@@ -17,7 +17,6 @@ class SpiderVueComponent<T extends Vue> extends ComponentInstance {
         if((this.vueInst as any).Update){
             (this.vueInst as any).Update();
         }
-        // (this.vueInst as any).Update?.();
     }
     
     public vueInst: T;
@@ -38,7 +37,7 @@ class SpiderVueComponent<T extends Vue> extends ComponentInstance {
     }
 
     ///
-    static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance | undefined>
+    static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance>
         =
         async (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => {
             await SpiderVueComponent.prepare(div, setting);

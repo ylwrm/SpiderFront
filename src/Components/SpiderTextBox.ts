@@ -5,7 +5,7 @@ interface SpiderTextBoxInstanceSetting extends Spider.ComponentInstanceSetting {
     config: any;
 }
 class SpiderTextBox extends ComponentInstance {
-    public Update = async ()=>{
+    public update = async ()=>{
     }
 
     private input: HTMLInputElement;
@@ -37,7 +37,7 @@ class SpiderTextBox extends ComponentInstance {
     private setup = async () => {
     };
     ///
-    static createInstance: (div: HTMLDivElement, setting: SpiderTextBoxInstanceSetting) => Promise<ComponentInstance | undefined>
+    static createInstance: (div: HTMLDivElement, setting: SpiderTextBoxInstanceSetting) => Promise<ComponentInstance>
         =
         async (div: HTMLDivElement, setting: SpiderTextBoxInstanceSetting) => {
             await SpiderTextBox.prepare();

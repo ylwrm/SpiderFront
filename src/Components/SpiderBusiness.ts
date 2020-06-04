@@ -10,19 +10,7 @@ interface SpiderBusinessInstanceSetting extends Spider.ComponentInstanceSetting 
     };
 }
 class SpiderBusiness extends ComponentInstance {
-    public Update = async () => {
-        const scripts: {
-            js: string,
-            name: string
-        }[] = this.setting.config.scripts!;
-        for (let iS = 0; iS < scripts.length; iS++) {
-            const spt = scripts[iS];
-            await DomLoader.LoadScript(spt.js);
-            window[spt.name](this);
-        }
-    }
-
-
+    ///
     constructor(
         public div: HTMLDivElement,
         public setting: SpiderBusinessInstanceSetting,
@@ -31,18 +19,29 @@ class SpiderBusiness extends ComponentInstance {
     ) {
         super(div, setting, name, parent);
     }
+
     ///
-    private setup = async () => {
-    };
+    public update = async () => {
+        const scripts: {
+            js: string,
+            name: string
+        }[] = this.setting.config.scripts;
+        for (let iS = 0; iS < scripts.length; iS++) {
+            const spt = scripts[iS];
+            await DomLoader.LoadScript(spt.js);
+            window[spt.name](this);
+        }
+    }
+
     ///
-    static createInstance: (div: HTMLDivElement, setting: SpiderBusinessInstanceSetting) => Promise<ComponentInstance | undefined>
+    static createInstance: (div: HTMLDivElement, setting: SpiderBusinessInstanceSetting) => Promise<ComponentInstance>
         =
         async (div: HTMLDivElement, setting: SpiderBusinessInstanceSetting) => {
             await SpiderBusiness.prepare();
             const obj = new SpiderBusiness(div, setting);
-            await obj.setup();
             return obj;
         };
+
     ///
     static prepare: () => Promise<void>
         =

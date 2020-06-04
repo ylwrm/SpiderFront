@@ -6,6 +6,7 @@ declare namespace Spider {
     interface ComponentInstanceSetting {
         name: string;
         type: string;
+        arg?: any;
         config: any;
     }
 }

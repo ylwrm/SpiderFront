@@ -1,6 +1,5 @@
 class SpiderRouter extends ComponentInstance {
-    Update?: ((option?: any) => Promise<void>) | undefined;
-    
+    ///
     constructor(
         public div: HTMLDivElement,
         public setting: Spider.ComponentInstanceSetting,
@@ -9,9 +8,12 @@ class SpiderRouter extends ComponentInstance {
     ) {
         super(div, setting, name, parent);
     }
+
+    ///
+    public update: () => Promise<void> = async () => {};
     
     ///
-    static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance | undefined>
+    public static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance>
         =
         async (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => {
             await SpiderRouter.prepare();
@@ -20,14 +22,12 @@ class SpiderRouter extends ComponentInstance {
         };
 
     ///
-    static prepare: () => Promise<void>
+    public static prepare: () => Promise<void>
         =
         async () => {
             const scripts: string[] = [
-                "Libs/handsontable/dist/handsontable.full.min.js"
             ];
             const csses: string[] = [
-                "Libs/handsontable/dist/handsontable.full.min.css"
             ];
             for (let iS = 0; iS < scripts.length; iS++) {
                 const spt = scripts[iS];

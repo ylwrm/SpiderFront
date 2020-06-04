@@ -7,10 +7,10 @@ interface SpiderCombinationInstanceSetting extends Spider.ComponentInstanceSetti
     };
 }
 class SpiderCombination extends ComponentInstance {
-    public Update = async ()=>{
+    public update = async ()=>{
         for (let iC = 0; iC < this.ControlInsts.length; iC++) {
             const inst = this.ControlInsts[iC];
-            inst.Update?.();
+            inst.update?.();
         }
     }
 
@@ -37,7 +37,7 @@ class SpiderCombination extends ComponentInstance {
         }
     };
     ///
-    static createInstance: (div: HTMLDivElement, setting: SpiderCombinationInstanceSetting) => Promise<ComponentInstance | undefined>
+    static createInstance: (div: HTMLDivElement, setting: SpiderCombinationInstanceSetting) => Promise<ComponentInstance>
         =
         async (div: HTMLDivElement, setting: SpiderCombinationInstanceSetting) => {
             await SpiderCombination.prepare();

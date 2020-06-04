@@ -31,7 +31,7 @@ const initApp = async (rootDiv: HTMLDivElement, appName: string) => {
 (async () => {
     if (appName) {
         app = await initApp(rootDiv, appName);
-        app?.Update?.();
+        app.update();
     } else {
         const appRoots = (await FileSystem.GetFileSystems(rootApplications)).filter(t=>t.isDir);
         const btns: HTMLButtonElement[] = [];
@@ -54,7 +54,7 @@ const initApp = async (rootDiv: HTMLDivElement, appName: string) => {
                 // create app
                 appName = appRoot.name;
                 app = await initApp(rootDiv, appName);
-                app?.Update?.();
+                app.update();
             };
             btn.addEventListener('click', clickHandler);
             btns.push(btn);

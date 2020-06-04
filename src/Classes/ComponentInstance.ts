@@ -1,19 +1,26 @@
 
-abstract class ComponentInstance {
+class ComponentInstance {
     ///
     constructor(
         public div: HTMLDivElement,
         public setting: Spider.ComponentInstanceSetting,
         public name?: string,
-        public parent?: SpiderCombination) {}
+        public parent?: SpiderCombination) { }
     ///
-    static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance|undefined>
-    =
-    async (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting)=>{
-        return undefined;
+    static createInstance: (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => Promise<ComponentInstance>
+        =
+        async (div: HTMLDivElement, setting: Spider.ComponentInstanceSetting) => {
+            const obj = new ComponentInstance(div, setting);
+            return obj;
+        };
+
+    ///
+    update: () => Promise<void> = async () => {
+
     };
+
     ///
-    abstract Update?: (option?: any) => Promise<void>;
-    ///
-    abstract destroy: (option?: any) => Promise<void>;
+    destroy: () => Promise<void> = async () => {
+
+    };
 }
