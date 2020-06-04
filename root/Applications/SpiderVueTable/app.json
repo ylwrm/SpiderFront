@@ -8,7 +8,7 @@
                 "type": "SpiderVueComponent",
                 "config": {
                     "type": "SpiderVueTable",
-                    "显示行数": 1000,
+                    "显示行数": 5,
                     "选中框": "是",
                     "是否分页": "是",
                     "序号": "是",
@@ -61,7 +61,7 @@
                             "列宽度": "120px"
                         },
                         {
-                            "列字段": "(t)=>'v' + t.Major + '.' +t.Minor",
+                            "列字段": "(t)=>t.Major&&t.Minor?('v' + t.Major + '.' +t.Minor):''",
                             "列名称": "版本",
                             "列宽度": "120px"
                         },

@@ -151,7 +151,7 @@ export default class SpiderVueTable extends Vue implements SpiderVueBase {
     // 主要创建配置的控件
     private parent = null;
     // 控件
-    private control: any = null;
+    private control: HTMLDivElement | undefined = undefined;
     private loading = true;
     // 特殊固定列的列数
     private fixNum = 0;
@@ -159,11 +159,46 @@ export default class SpiderVueTable extends Vue implements SpiderVueBase {
     private selection: any[] = [];
     // 懒加载获取上一次的数据
     private getUpdata: any[] = [];
+    
+    public addEventListenerTableChange:
+        (listener: (this: HTMLElement, ev: CustomEvent<{
+            page: number,
+            countperpage: number,
+            sortName: string,
+            sort: 'asc' | 'desc'
+        }>) => any) => void
+        =
+        (listener: (this: HTMLElement, ev: CustomEvent<any>) => any) => {
+            this.ComponentInstance!.div!.addEventListener('TableChange', listener as any);
+        };
+    public addEventListenerCheckChanged:
+        (listener: (this: HTMLElement, ev: CustomEvent<any[]>) => any) => void
+        =
+        (listener: (this: HTMLElement, ev: CustomEvent<any>) => any) => {
+            this.ComponentInstance!.div!.addEventListener('CheckChanged', listener as any);
+        };
+    public addEventListenerLinkClicked:
+        (listener: (this: HTMLElement, ev: CustomEvent<any>) => any) => void
+        =
+        (listener: (this: HTMLElement, ev: CustomEvent<any>) => any) => {
+            this.ComponentInstance!.div!.addEventListener('LinkClicked', listener as any);
+        };
+    public addEventListenerRowExpanded:
+        (listener: (this: HTMLElement, ev: CustomEvent<{
+            div: HTMLDivElement,
+            rowdata: any,
+        }>) => any) => void
+        =
+        (listener: (this: HTMLElement, ev: CustomEvent<any>) => any) => {
+            this.ComponentInstance!.div!.addEventListener('RowExpanded', listener as any);
+        };
 
     async Update() {
         this.config = this.ComponentInstance?.setting.config;
         this.control = this.ComponentInstance?.div;
         console.log('-------table列表--------')
+        console.log(this.$props)
+        console.log(this.ComponentInstance)
         this.tHeadList = this.config.配置列表
         this.tablePageSize = this.config.显示行数 ? this.config.显示行数 : null
         if (this.config.序号) {
@@ -218,13 +253,12 @@ export default class SpiderVueTable extends Vue implements SpiderVueBase {
                 }
             }
         })
-        this.loading = true
+        this.loading = true;
 
-        this.control.oldAddEventListener = this.control.addEventListener
-        const myThis = this
-        this.control.addEventListener = (...args: string[]) => {
-            console.log(args)
-            myThis.control.oldAddEventListener(...args)
+        (this.control as any).oldAddEventListener = (this.control as any).addEventListener
+        const myThis = this;
+        (this.control as any).addEventListener = (...args: string[]) => {
+            (this.control as any).oldAddEventListener(...args)
             if (args[0] === 'CheckChanged') {
                 setTimeout(() => {
                     myThis.GetChecked([])
@@ -232,18 +266,20 @@ export default class SpiderVueTable extends Vue implements SpiderVueBase {
             }
             if (args[0] === 'TableChange') {
                 setTimeout(() => {
-                    myThis.$emit('TableChange', {
-                        page: myThis.tableCurrentPage,
-                        countperpage: myThis.tablePageSize,
-                        sortName: myThis.sortCol,
-                        sort: myThis.sort
-                    })
-                }, 100)
+                    myThis.control?.dispatchEvent(new CustomEvent('TableChange', {
+                        detail: {
+                            page: myThis.tableCurrentPage,
+                            countperpage: myThis.tablePageSize,
+                            sortName: myThis.sortCol,
+                            sort: myThis.sort
+                        }
+                    }));
+                }, 100);
             }
         }
     }
     // 更新数据
-    UpdateData(tabledata: { data: any[]; totalcount: number; }) {
+    public UpdateData(tabledata: { data: any[]; totalcount: number; }) {
         tabledata.data.forEach(el => {
             this.tHeadList.forEach(configel => {
                 try {
@@ -288,10 +324,9 @@ export default class SpiderVueTable extends Vue implements SpiderVueBase {
     //选中记录时触发的函数
     GetChecked(selection: any[]) {
         this.selection = selection
-        if (window['SendMessage']) {
-            window['SendMessage']({ name: 'CheckChanged', obj: selection })
-        }
-        this.$emit('CheckChanged', selection)
+        this.control?.dispatchEvent(new CustomEvent('CheckChanged', {
+            detail: selection
+        }));
     }
     GetRows() {
         return this.tBodyList
@@ -301,17 +336,15 @@ export default class SpiderVueTable extends Vue implements SpiderVueBase {
     }
     //点击文字链接触发的函数
     LinkClicked(val: any) {
-        if (window['SendMessage']) {
-            window['SendMessage']({ name: 'LinkClicked', obj: val })
-        }
-        this.$emit('LinkClicked', val)
+        this.control?.dispatchEvent(new CustomEvent('LinkClicked', {
+            detail: val
+        }));
     }
     // 点击行触发的函数
     RowClicked(row: any) {
-        if (window['SendMessage']) {
-            window['SendMessage']({ name: 'RowClicked', obj: row })
-        }
-        this.$emit('RowClicked', row)
+        this.control?.dispatchEvent(new CustomEvent('RowClicked', {
+            detail: row
+        }));
     }
     // 展开行触发的函数
     toggleRowExpansion(row: { isShowExband: boolean; order: string | number; }) {
@@ -321,21 +354,13 @@ export default class SpiderVueTable extends Vue implements SpiderVueBase {
                 // 展开行临时的宽度
                 (this.$refs[row.order] as HTMLElement).style.width =
                     (this.$refs.container as HTMLElement).offsetWidth - 130 + 'px'
-                if (window['SendMessage']) {
-                    window['SendMessage']({
-                        name: 'RowExpanded',
-                        obj: {
-                            div: this.$refs[row.order],
-                            rowdata: row,
-                            context: this.context
-                        }
-                    })
-                }
-                this.$emit('RowExpanded', {
-                    div: this.$refs[row.order],
-                    rowdata: row,
-                    context: this.context
-                })
+                this.control?.dispatchEvent(new CustomEvent('RowExpanded', {
+                    detail: {
+                        div: this.$refs[row.order],
+                        rowdata: row,
+                        context: this.context
+                    }
+                }));
                 this.expandHeight = (this.$refs[row.order] as HTMLElement).offsetHeight + 'px'
             })
         }
@@ -349,46 +374,28 @@ export default class SpiderVueTable extends Vue implements SpiderVueBase {
                 this.tableCurrentPage++
             }
             // this.loading = true
-            if (window['SendMessage']) {
-                window['SendMessage']({
-                    name: 'TableChange',
-                    obj: {
-                        page: this.tableCurrentPage,
-                        countperpage: this.tablePageSize,
-                        sortName: this.sortCol,
-                        sort: this.sort
-                    }
-                })
-            }
-            this.$emit('TableChange', {
-                page: this.tableCurrentPage,
-                countperpage: this.tablePageSize,
-                sortName: this.sortCol,
-                sort: this.sort
-            })
+            this.control?.dispatchEvent(new CustomEvent('TableChange', {
+                detail: {
+                    page: this.tableCurrentPage,
+                    countperpage: this.tablePageSize,
+                    sortName: this.sortCol,
+                    sort: this.sort
+                }
+            }));
         }
     }
     // pageSize改变时触发的函数
     handleSizeChange(val: number) {
         this.tablePageSize = val
         this.loading = true
-        if (window['SendMessage']) {
-            window['SendMessage']({
-                name: 'TableChange',
-                obj: {
-                    page: this.tableCurrentPage,
-                    countperpage: this.tablePageSize,
-                    sortName: this.sortCol,
-                    sort: this.sort
-                }
-            })
-        }
-        this.$emit('TableChange', {
-            page: this.tableCurrentPage,
-            countperpage: this.tablePageSize,
-            sortName: this.sortCol,
-            sort: this.sort
-        })
+        this.control?.dispatchEvent(new CustomEvent('TableChange', {
+            detail: {
+                page: this.tableCurrentPage,
+                countperpage: this.tablePageSize,
+                sortName: this.sortCol,
+                sort: this.sort
+            }
+        }));
     }
     // 当前页改变时触发的函数
     handleCurrentChange(val: number) {
@@ -397,23 +404,14 @@ export default class SpiderVueTable extends Vue implements SpiderVueBase {
         }
         this.tableCurrentPage = Math.max(1, val)
         this.loading = true
-        if (window['SendMessage']) {
-            window['SendMessage']({
-                name: 'TableChange',
-                obj: {
-                    page: this.tableCurrentPage,
-                    countperpage: this.tablePageSize,
-                    sortName: this.sortCol,
-                    sort: this.sort
-                }
-            })
-        }
-        this.$emit('TableChange', {
-            page: this.tableCurrentPage,
-            countperpage: this.tablePageSize,
-            sortName: this.sortCol,
-            sort: this.sort
-        })
+        this.control?.dispatchEvent(new CustomEvent('TableChange', {
+            detail: {
+                page: this.tableCurrentPage,
+                countperpage: this.tablePageSize,
+                sortName: this.sortCol,
+                sort: this.sort
+            }
+        }));
     }
     // 排序触发的函数
     SortChange(column: { prop: null; order: string; }) {
@@ -426,23 +424,14 @@ export default class SpiderVueTable extends Vue implements SpiderVueBase {
             this.sort = 'desc'
         }
         this.loading = true
-        if (window['SendMessage']) {
-            window['SendMessage']({
-                name: 'TableChange',
-                obj: {
-                    page: this.tableCurrentPage,
-                    countperpage: this.tablePageSize,
-                    sortName: this.sortCol,
-                    sort: this.sort
-                }
-            })
-        }
-        this.$emit('TableChange', {
-            page: this.tableCurrentPage,
-            countperpage: this.tablePageSize,
-            sortName: this.sortCol,
-            sort: this.sort
-        })
+        this.control?.dispatchEvent(new CustomEvent('TableChange', {
+            detail: {
+                page: this.tableCurrentPage,
+                countperpage: this.tablePageSize,
+                sortName: this.sortCol,
+                sort: this.sort
+            }
+        }));
     }
     // 刷新函数
     refresh() {
